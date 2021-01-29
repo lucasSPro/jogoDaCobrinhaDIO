@@ -1,6 +1,4 @@
 let canvas = document.getElementById("snake");
-let player = document.getElementById("player");
-let food = document.getElementById("food");
 let context = canvas.getContext("2d");
 let box = 32;
 let snake = [];
@@ -15,20 +13,32 @@ let comida = {
 }
 
 function criarBG(){
-    context.fillStyle = "lightgreen";
+    context.fillStyle = "rgb(68,67,68)";
     context.fillRect(0,0,16 * box, 16 * box);
-}
+}1
 
 function criarCobrinha(){
+    let r = 242;
+    let g = 50;
+    let b = 55;
     for(i = 0; i < snake.length ; i++ ){
-        context.fillStyle = 'green';
-        context.fillRect(snake[i].x, snake[i].y, box, box);
+        var circle = new Path2D();
+        for (var j = 0; j < 6; j++) {
+        circle.arc(snake[i].x  , snake[i].y , box - 12, box - 12, 4.3 * Math.PI);
+        context.fillStyle = 'rgb(' + (r += 0.1) + ',' + (g += 1.5) + ',' +
+        (b -= 0.5) + ')';
+        
+        //context.fillRect(snake[i].x, snake[i].y, box, box);
+        context.fill(circle);
+        }
     }
 }
 
 function criarComida(){
-    context.fillStyle = "black";
-    context.fillRect(comida.x, comida.y, box, box)
+    var circle = new Path2D();
+    context.fillStyle = "white";
+    circle.arc(comida.x  , comida.y , box - 15, box - 15, 5.3 * Math.PI);
+    context.fill(circle)
 }
 
 document.addEventListener('keydown', update);
