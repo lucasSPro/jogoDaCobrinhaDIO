@@ -1,4 +1,5 @@
 let canvas = document.getElementById("snake");
+let titulo =  document.getElementById("titulo");
 let context = canvas.getContext("2d");
 let box = 32;
 let snake = [];
@@ -24,12 +25,16 @@ function criarCobrinha(){
     for(i = 0; i < snake.length ; i++ ){
         var circle = new Path2D();
         for (var j = 0; j < 6; j++) {
-        circle.arc(snake[i].x  , snake[i].y , box - 12, box - 12, 4.3 * Math.PI);
-        context.fillStyle = 'rgb(' + (r += 0.1) + ',' + (g += 1.5) + ',' +
-        (b -= 0.5) + ')';
-        
-        //context.fillRect(snake[i].x, snake[i].y, box, box);
-        context.fill(circle);
+            circle.arc(snake[i].x  , snake[i].y , box - 12, box - 12, 4.3 * Math.PI);
+            context.fillStyle = 'rgb(' + (r += 0.1) + ',' + (g += 1.5) + ',' +
+            (b -= 0.5) + ')';
+            context.fill(circle);
+            if(i == 0){
+                context.beginPath();
+                context.arc( snake[i].x ,snake[i].y , 25, 0, Math.PI * 2, true);  
+                context.strokeStyle = "rgb(169,171,173)";
+                context.stroke();
+            }
         }
     }
 }
@@ -59,7 +64,7 @@ function iniciarGame(){
     for(i = 1; i < snake.length; i++ ){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y ){
            clearInterval(jogo);
-           alert('Game Over.') 
+           titulo.innerHTML = "Game Over"
         }
     }
 
