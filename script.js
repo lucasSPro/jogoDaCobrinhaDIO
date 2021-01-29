@@ -1,4 +1,6 @@
 let canvas = document.getElementById("snake");
+let player = document.getElementById("player");
+let food = document.getElementById("food");
 let context = canvas.getContext("2d");
 let box = 32;
 let snake = [];
@@ -25,7 +27,7 @@ function criarCobrinha(){
 }
 
 function criarComida(){
-    context.fillStyle = "red";
+    context.fillStyle = "black";
     context.fillRect(comida.x, comida.y, box, box)
 }
 
