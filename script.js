@@ -16,7 +16,8 @@ let comida = {
 function criarBG(){
     context.fillStyle = "rgb(68,67,68)";
     context.fillRect(0,0,16 * box, 16 * box);
-}1
+    canvas.getContext("2d")
+}
 
 function criarCobrinha(){
     let r = 242;

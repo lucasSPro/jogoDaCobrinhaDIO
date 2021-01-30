@@ -9,3 +9,26 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(223, 223, 231);
 }
+
+
+ .bg {
+  border: 5px solid rgba(70, 68, 68, 0.733);
+  border-radius: 16px;
+  font-size: 24px;
+  line-height: 2;
+}
+.controls{
+    display: flex;
+    width: 480px;
+    margin-bottom: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+.control-item{
+    display: flex;
+    width: 150px;
+    height: 50px;
+    align-content: center;
+    justify-content: center;
+    background: rgba(70, 68, 68, 0.733);
+}
