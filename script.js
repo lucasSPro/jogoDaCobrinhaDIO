@@ -1,20 +1,27 @@
 let canvas = document.getElementById("snake");
-let titulo =  document.getElementById("titulo");
+let score =  document.getElementById("score");
+let highScore =  document.getElementById("highscore");
 let context = canvas.getContext("2d");
 let box = 32;
+let scoreNumber = 1;
+let highScoreNumber = 0;
 let snake = [];
 snake[0] = {
     x: 8 * box,
     y: 8 * box
 };
 let direction = "right";
+if(localStorage.getItem('highScore')){
+    highScoreNumber = localStorage.getItem('highScore')
+    highScore.innerHTML = "HighScore: " + highScoreNumber;
+}
 let comida = {
     x: Math.floor(Math.random() * 15 + 1) * box,
     y: Math.floor(Math.random() * 15 + 1) * box,
 }
 
 function criarBG(){
-    context.fillStyle = "rgb(68,67,68)";
+    context.fillStyle = "rgb(19,20,27)";
     context.fillRect(0,0,16 * box, 16 * box);
     canvas.getContext("2d")
 }
@@ -50,6 +57,7 @@ function criarComida(){
 document.addEventListener('keydown', update);
 
 function update(event){
+    
     if(event.keyCode == 37 && direction != "right") direction = "left";
     if(event.keyCode == 38 && direction != "down") direction = "up";
     if(event.keyCode == 39 && direction != "left") direction = "right";
@@ -65,7 +73,8 @@ function iniciarGame(){
     for(i = 1; i < snake.length; i++ ){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y ){
            clearInterval(jogo);
-           titulo.innerHTML = "Game Over"
+           saveScore();
+           limpaJogo();
         }
     }
 
@@ -86,6 +95,7 @@ function iniciarGame(){
     }else{
       comida.x = Math.floor(Math.random() * 15 + 1) * box;
       comida.y = Math.floor(Math.random() * 15 + 1) * box;
+      score.innerHTML = "Score: " + (scoreNumber++).toString();
     }
 
     let newHead = {
@@ -93,6 +103,25 @@ function iniciarGame(){
         y: snakeY
     }
     snake.unshift(newHead);
+}
+function saveScore(){
+    if (scoreNumber > highScoreNumber){
+        highScoreNumber = scoreNumber
+        highScore.innerHTML = "HighScore: " + highScoreNumber;
+        window.localStorage.setItem('highScore', highScoreNumber )
+    
+    }
+  }
+function limpaJogo(){
+    scoreNumber = 0;
+    score.innerHTML = "Score: " + scoreNumber;
+    
+    snake = [];
+    snake[0] = {
+        x: 8 * box,
+        y: 8 * box
+    }; 
+    jogo = setInterval(iniciarGame, 100);
 }
 
 let jogo =  setInterval(iniciarGame, 100);
